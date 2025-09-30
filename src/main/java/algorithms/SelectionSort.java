@@ -1,7 +1,7 @@
 package main.java.algorithms;
 
-public class SelectionSort {
-    public static int[] sort(int[] arr, boolean earlyTerminate ){
+public class SelectionSort implements SortingAlgorithm{
+    public  int[] sort(int[] arr, boolean earlyTerminate){
         int len = arr.length;
 
         for(int i = 0;i < len;i++){
