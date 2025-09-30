@@ -1,4 +1,4 @@
-package main.java.metrics;
+package metrics;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -62,15 +62,24 @@ public class PerformanceTracker {
 
     // Export metrics to CSV
     public void exportCSV(String filename, String algorithmName) {
-        try (FileWriter writer = new FileWriter(filename, true)) {
-            writer.append(algorithmName).append(",")
-                    .append(String.valueOf(getElapsedTimeMillis())).append(",")
-                    .append(String.valueOf(comparisons)).append(",")
-                    .append(String.valueOf(shifts)).append(",")
-                    .append(String.valueOf(arrayAccesses)).append(",")
-                    .append(String.valueOf(memoryAllocations)).append("\n");
+        try {
+            boolean fileExists = new java.io.File(filename).exists();
+            try (FileWriter writer = new FileWriter(filename, true)) {
+                // write header if file does not exist
+                if (!fileExists) {
+                    writer.append("Algorithm,Time(ms),Comparisons,Shifts,ArrayAccesses,MemoryAllocations\n");
+                }
+                // write data
+                writer.append(algorithmName).append(",")
+                        .append(String.valueOf(getElapsedTimeMillis())).append(",")
+                        .append(String.valueOf(comparisons)).append(",")
+                        .append(String.valueOf(shifts)).append(",")
+                        .append(String.valueOf(arrayAccesses)).append(",")
+                        .append(String.valueOf(memoryAllocations)).append("\n");
+            }
         } catch (IOException e) {
             System.err.println("Error writing CSV: " + e.getMessage());
         }
     }
+
 }

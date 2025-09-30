@@ -1,8 +1,8 @@
-package main.java.cli;
+package cli;
 
-import main.java.metrics.PerformanceTracker;
-import main.java.algorithms.InsertionSort;
-import main.java.algorithms.SelectionSort;
+import metrics.PerformanceTracker;
+import algorithms.InsertionSort;
+import algorithms.SelectionSort;
 
 import java.util.Arrays;
 

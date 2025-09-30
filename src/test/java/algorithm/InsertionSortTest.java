@@ -1,9 +1,11 @@
 package algorithm;
 
-import main.java.algorithms.InsertionSort;
-import main.java.metrics.PerformanceTracker;
+import metrics.PerformanceTracker;
+import algorithms.InsertionSort;
 import org.junit.jupiter.api.Test;
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,4 +62,36 @@ class InsertionSortTest {
 
         assertArrayEquals(expected, arr);
     }
+    @Test
+    void testPerformanceOnLargeArrays() {
+        int[] sizes = {1000, 10000, 100000};
+        for (int size : sizes) {
+            int[] arr = new int[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = (int) (Math.random() * size);
+            }
+
+            PerformanceTracker tracker = new PerformanceTracker();
+            tracker.start();
+            InsertionSort.insertionSort(arr, tracker);
+            tracker.stop();
+
+            System.out.printf("InsertionSort | n=%d | time=%d ms | comparisons=%d | shifts=%d | accesses=%d%n",
+                    size,
+                    tracker.getElapsedTimeMillis(),
+                    tracker.getComparisons(),
+                    tracker.getShifts(),
+                    tracker.getArrayAccesses());
+
+            assertTrue(isSorted(arr));
+        }
+    }
+
+    private boolean isSorted(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[i - 1]) return false;
+        }
+        return true;
+    }
+
 }

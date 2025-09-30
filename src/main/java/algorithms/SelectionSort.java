@@ -1,6 +1,6 @@
-package main.java.algorithms;
+package algorithms;
 
-import main.java.metrics.PerformanceTracker;
+import metrics.PerformanceTracker;
 
 public class SelectionSort {
 

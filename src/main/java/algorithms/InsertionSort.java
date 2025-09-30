@@ -1,6 +1,6 @@
-package main.java.algorithms;
+package algorithms;
 
-import main.java.metrics.PerformanceTracker;
+import metrics.PerformanceTracker;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
